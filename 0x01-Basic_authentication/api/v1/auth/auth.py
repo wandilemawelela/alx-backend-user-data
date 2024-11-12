@@ -1,4 +1,4 @@
-# api/v1/auth/auth.py
+#!/usr/bin/env python3
 """
 Authentication module for the API.
 """
