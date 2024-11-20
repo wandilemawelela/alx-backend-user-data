@@ -8,7 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from user import Base, User
-
+from sqlalchemy.exc import InvalidRequestError, NoResultFound
 
 class DB:
     """
@@ -50,3 +50,16 @@ class DB:
 
         # Return the newly created user
         return new_user
+
+    def find_user_by(self, **kwargs) -> User:
+        """
+        """
+        for key in kwargs.keys():
+            if not hasattr(User, key):
+                raise InvalidRequestError()
+
+        new_user = self._session.query(User).filter_by(**kwargs).first()
+
+        if new_user:
+            return new_user
+        raise NoResultFound()
