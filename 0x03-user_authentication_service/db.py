@@ -10,6 +10,7 @@ from sqlalchemy.orm.session import Session
 from user import Base, User
 from sqlalchemy.exc import InvalidRequestError, NoResultFound
 
+
 class DB:
     """
     DB class
@@ -53,6 +54,7 @@ class DB:
 
     def find_user_by(self, **kwargs) -> User:
         """
+        Find user by ID method
         """
         for key in kwargs.keys():
             if not hasattr(User, key):
