@@ -21,26 +21,8 @@ class User(Base):
     reset_token = Column(String, nullable=True)
 
 
-# Example of creating an SQLite database and adding a user
 if __name__ == "__main__":
-    # Replace 'sqlite:///example.db' with your database URL
-    engine = create_engine('sqlite:///example.db', echo=True)
+    print(User.__tablename__)
 
-    # Create the users table
-    Base.metadata.create_all(engine)
-
-    # Create a new session
-    Session = sessionmaker(bind=engine)
-    session = Session()
-
-    # Create a new user
-    new_user = User(email="user@example.com", hashed_password="hashedpassword123")
-
-    # Add the user to the session and commit the transaction
-    session.add(new_user)
-    session.commit()
-
-    # Query the database
-    users = session.query(User).all()
-    for user in users:
-        print(user.id, user.email)
+    for column in User.__table__.columns:
+        print("{}: {}.".format(column, column.type))
