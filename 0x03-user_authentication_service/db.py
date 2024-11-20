@@ -7,7 +7,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-
 from user import Base, User
 
 
@@ -41,13 +40,13 @@ class DB:
         """
         # Create a new User instance
         new_user = User(email=email, hashed_password=hashed_password)
-        
+
         # Add the user to the current session
         session = self._session
         session.add(new_user)
-        
+
         # Commit the session to save the user in the database
         session.commit()
-        
+
         # Return the newly created user
         return new_user
